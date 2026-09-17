@@ -1,10 +1,9 @@
 object casa {
   var suciedad = 100
   var cuidador = tom
-  var quilomberos = [jerry,tuffy]
+  var quilombero = pandilla
 
-  
-  method quilomberos() = quilomberos
+
 
   method modificarSuciedad(valor) {
     suciedad += valor
@@ -18,26 +17,42 @@ object casa {
 
   method pasaElDia() {
     cuidador.limpiarCasa(self)
-    quilomberos.removeAll(self.obtenerQuilomberosAtrapables())
+    if(cuidador.puedeAtraparQuilombero(quilombero)) {
+      quilombero = quilomberoNulo
+    }
   }
 
-  method obtenerQuilomberosAtrapables() = quilomberos.filter({quilombero => cuidador.puedeAtraparQuilombero(quilombero)})
+  method pasaLaNoche() {
+    cuidador.dormir()
+    quilombero.hacerQuilombo(self)
+  }
+
+  method cuidador(nuevoCuidador) {
+    cuidador = nuevoCuidador
+  }
  
 }
 
-object pandilla {
+object quilomberoNulo {
+  method hacerQuilombo(casa) {
+  }
 
+  method velocidad() = 0
+}
+
+object pandilla {
+   const quilomberos = [jerry,terry]
    method hacerQuilombo(casa) {
-    if(casa.quilomberos().size() > 3) {
+    if(quilomberos.size() > 3) {
       casa.interrumpirSuenioCuidador()
     }
-    casa.quilomberos().map({quilombero => quilombero.hacerQuilombo(casa)})
+    quilomberos.map({quilombero => quilombero.hacerQuilombo(casa)})
 
   }
 
   method velocidad() = self.obtenerVelocidades().min() / 2
 
-  method obtenerVelocidades() = casa.quilomberos().map({quilombero => quilombero.velocidad()})
+  method obtenerVelocidades() = quilomberos.map({quilombero => quilombero.velocidad()})
 }
 
 object tom {
