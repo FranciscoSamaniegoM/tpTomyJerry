@@ -1,8 +1,8 @@
 
 
 ## Hecho por
-##Ball Ciro
-##Markiw Mariana Katerina
-##Samaniego Martínez Francisco
+## Ball Ciro
+## Markiw Mariana Katerina
+## Samaniego Martínez Francisco
 
 
